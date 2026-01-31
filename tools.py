@@ -4,6 +4,7 @@ from torchvision import datasets
 from torchvision.transforms.functional import to_pil_image
 import torchvision.transforms as transforms
 import random
+import os
 
 
 def get_free_gpu():
@@ -90,6 +91,8 @@ class TransformedTensorDataset(Dataset):
         
 def get_dataset(name='cifar10', data_root = './data/clean', train = True, transform = transforms.Compose([transforms.ToTensor()])):
 
+    os.makedirs(data_root, exist_ok=True)
+    
     if name.lower() not in ['cifar10', 'cifar100', 'svhn']:
         raise ValueError(f"Unsupported dataset: {name}")
 
